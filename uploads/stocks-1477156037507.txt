@@ -1,0 +1,10 @@
+[
+ {"Name" :"Madhav","Guardian" : "Sai","level" : "kids-1", "feesPaid" :"yes"},
+{"Name" :"Anu","Guardian" : "SaiD","level" : "kids-1", "feesPaid" :"yes"},
+{"Name" :"Pinki","Guardian" : "Dave","level" : "kids-1", "feesPaid" :"no"},
+ {"Name" :"Aadi","Guardian" : "Adi" ,"level" : "Kids-2", "feesPaid" :"yes"},
+{"Name" :"Aadi","Guardian" : "Adi" ,"level" : "Kids-2", "feesPaid" :"yes"},
+{"Name" :"swadi","Guardian" : "Adil" ,"level" : "Kids-2", "feesPaid" :"no"},
+{"Name" :"Aswin","Guardian" : "Kumar" ,"level" : "Kids-2", "feesPaid" :"no"},
+{"Name" :"Kwin","Guardian" : "Kat" ,"level" : "Kids-2", "feesPaid" :"no"}
+ ]

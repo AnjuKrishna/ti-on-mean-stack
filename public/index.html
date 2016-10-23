@@ -1,0 +1,103 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    
+
+      <script>
+      
+          var app = angular.module('ui.bootstrap.demo', ['ui.bootstrap']);
+          app.controller('TabsDemoCtrl', function ($scope, $window) {
+              $scope.tabs = [
+                  { title:'Home', content:'home content', url:'home.html' },
+                  { title:'upload', content:'Manage Users content', url:'upload.html'}                
+                 
+              ]; 
+          });
+           app.controller('myCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
+        $scope.uploadFile = function(){
+           var file = $scope.myFile;
+           var uploadUrl = "/savedata";
+           fileUpload.uploadFileToUrl(file, uploadUrl);
+        };
+     }]);
+
+          app.directive('fileModel', ['$parse', function ($parse) {
+        return {
+           restrict: 'A',
+           link: function(scope, element, attrs) {
+              var model = $parse(attrs.fileModel);
+              var modelSetter = model.assign;
+
+              element.bind('change', function(){
+                 scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
+                 });
+              });
+           }
+        };
+     }]);
+
+     app.service('fileUpload', ['$http', function ($http) {
+        this.uploadFileToUrl = function(file, uploadUrl){
+           var fd = new FormData();
+           fd.append('file', file);
+
+           $http.post(uploadUrl, fd, {
+              transformRequest: angular.identity,
+              headers: {'Content-Type': undefined}
+           })
+
+           .success(function(){
+           })
+
+           .error(function(){
+           });
+        }
+     }]);
+
+    
+          app.controller('memCtrl', function($scope) {
+          $scope.data =[
+ {"Name" :"Madhav","Guardian" : "Sai","level" : "kids-1", "feesPaid" :"yes"},
+{"Name" :"Anu","Guardian" : "SaiD","level" : "kids-1", "feesPaid" :"yes"},
+{"Name" :"Pinki","Guardian" : "Dave","level" : "kids-1", "feesPaid" :"no"},
+ {"Name" :"Aadi","Guardian" : "Adi" ,"level" : "Kids-2", "feesPaid" :"yes"},
+{"Name" :"Aadi","Guardian" : "Adi" ,"level" : "Kids-2", "feesPaid" :"yes"},
+{"Name" :"swadi","Guardian" : "Adil" ,"level" : "Kids-2", "feesPaid" :"no"},
+{"Name" :"Aswin","Guardian" : "Kumar" ,"level" : "Kids-2", "feesPaid" :"no"},
+{"Name" :"Kwin","Guardian" : "Kat" ,"level" : "Kids-2", "feesPaid" :"no"}
+ ] ;
+
+  $scope.save = function(){
+    $scope.albumNameArray = [];
+    angular.forEach($scope.data, function(album){
+      if (album.selected) $scope.albumNameArray.push(album.Name);
+    });
+  }
+         
+});
+          
+      </script>
+      
+      
+  </head>
+  <body>
+
+    <div class="container" ng-controller="TabsDemoCtrl">
+        <div class="row">
+            <div class="col-md-12"> 
+              <tabset>    
+                  <tab ng-repeat="tab in tabs" ng-model="tab" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">  
+                      <div ng-include src="tab.url"> </div>
+                    </tab>
+              </tabset>
+              
+          </div>
+        </div>
+    
+    </div>
+  </body>
+</html>

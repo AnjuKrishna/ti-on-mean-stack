@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<div ng-controller="memCtrl">
+
+<ul>
+
+          <li ng-repeat="mem in data">
+          <h3>
+            <span>{{mem.Name}}</span>
+            <span>{{mem.Guardian}}</span>
+	        <span>{{mem.level}}</span>
+	        <span ng-if="mem.feesPaid">fees paid</span>
+  <!-- If r.date does not contain a value show placeholder text -->
+  <span ng-if="mem.feesPaid == 'no'">
+	        <label><input type="checkbox" ng-model="mem.selected"></input>
+        pay now</label><span></h3>
+          </li>
+        </ul>
+ <button ng-click="save();">update</button>
+Saved results:<br>
+  {{albumNameArray}}
+
+</div>
+
+
+</body>
+</html>
